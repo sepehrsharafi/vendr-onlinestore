@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${satoshi.variable} ${clashDisplay.variable} antialiased`} // Add all font variables
+        className={`${satoshi.variable} ${clashDisplay.variable} antialiased`}
       >
         {children}
       </body>
