@@ -1,5 +1,6 @@
 import { satoshi, clashDisplay } from "./font"; // Import satoshi and clashDisplay fonts
 import "./globals.css";
+import Footer from "./ui/root-layout/footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
         className={`${satoshi.variable} ${clashDisplay.variable} antialiased`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
