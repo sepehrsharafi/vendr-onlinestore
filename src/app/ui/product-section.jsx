@@ -79,7 +79,7 @@ export default function ProductSection({ title, products }) {
   }
 
   return (
-    <section className="w-full flex flex-col gap-16 my-20">
+    <section className="w-full flex flex-col gap-16 my-14">
       <h1 className="font-clash-display text-[32px] xl:text-5xl font-bold text-center">
         {title}
       </h1>
@@ -96,7 +96,7 @@ export default function ProductSection({ title, products }) {
         ))}
       </div>
       <div className="flex justify-center">
-        <button className="transition-all duration-200 bg-white hover:bg-gray-100 text-[14px] xl:text-[16px] font-medium py-4 px-20 border-[1px] border-black/10 rounded-full">
+        <button className="transition-all duration-200 w-full md:w-fit mx-4 bg-white hover:bg-gray-100 text-[14px] xl:text-[16px] font-medium py-4 px-20 border-[1px] border-black/10 rounded-full">
           View All
         </button>
       </div>
