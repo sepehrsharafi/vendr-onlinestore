@@ -7,29 +7,33 @@ export default function Page() {
   // Calculate total price sum before rendering
 
   function CartItem({ imgSrc, title, price, quantity, size, color }) {
-    let [itmeQuantity, setItemQuantity] = useState(quantity);
+    let [itemQuantity, setItemQuantity] = useState(quantity);
 
     function incrimentQuantity() {
-      setItemQuantity(itmeQuantity + 1);
+      setItemQuantity(itemQuantity + 1);
       console.log("item up");
     }
 
     function substractQuantity() {
-      setItemQuantity(itmeQuantity - 1);
+      if (itemQuantity > 1) {
+        setItemQuantity(itemQuantity - 1);
+      }
     }
 
     return (
-      <article className="font-satoshi flex flex-row items-center justify-center gap-3 w-full">
+      <article className="font-satoshi flex flex-row items-center justify-between gap-3 w-full xl:min-w-[587px]">
         <Image
           src={imgSrc}
           width={400}
           height={400}
           alt="image"
-          className="min-h-24 h-24 max-h-24 min-w-24 max-w-24 object-cover rounded-lg"
+          className="min-h-24 h-24 max-h-24 min-w-24 max-w-24 xl:min-h-32 xl:h-32 xl:max-h-32 xl:min-w-32 xl:max-w-32 object-cover rounded-lg"
         />
-        <div className="flex flex-col w-80">
+        <div className="flex flex-col justify-between w-80 xl:w-full">
           <div className="flex flex-row justify-between">
-            <span className="text-[16px] font-bold line-clamp-1">{title}</span>
+            <span className="text-[16px] xl:text-xl font-bold line-clamp-1">
+              {title}
+            </span>
             <svg
               className="w-6 h-6"
               viewBox="0 0 20 20"
@@ -42,10 +46,14 @@ export default function Page() {
               />
             </svg>
           </div>
-          <span className="text-[12px] font-normal">Size: {size}</span>
-          <span className="text-[12px] font-normal">Color: {color}</span>
+          <span className="text-[12px] xl:text-[14px] font-normal">
+            Size: {size}
+          </span>
+          <span className="text-[12px] xl:text-[14px] font-normal">
+            Color: {color}
+          </span>
           <div className="flex flex-row items-center justify-between">
-            <span className="text-xl font-bold">${price}</span>
+            <span className="text-xl xl:text-2xl font-bold">${price}</span>
             <div className="flex flex-row items-center justify-around bg-[#F0F0F0] w-fit min-w-[100px] rounded-full">
               <button onClick={substractQuantity}>
                 <svg
@@ -61,7 +69,7 @@ export default function Page() {
                 </svg>
               </button>
               <span className="text-[16px] font-medium w-6 text-center">
-                {itmeQuantity}
+                {itemQuantity}
               </span>
               <button onClick={incrimentQuantity}>
                 <svg
@@ -115,82 +123,84 @@ export default function Page() {
   );
 
   return (
-    <main className="w-full px-4">
-      <h1 className="font-clash-display font-bold text-[32px] xl:text-[40px]">
+    <main className="max-w-[1200px] mx-auto w-full px-4">
+      <h1 className="font-clash-display font-bold text-[32px] xl:text-[40px] mb-5 xl:mb-6">
         Your cart
       </h1>
-      <section className=" border-[1px] border-gray-300 rounded-3xl p-4">
-        {cartItemData.map((item, index) => (
-          <React.Fragment key={index}>
-            <CartItem
-              imgSrc={`/images/${item.imgSrc}`}
-              title={item.title}
-              price={item.price}
-              quantity={item.quantity}
-              size={item.size}
-              color={item.color}
-            />
+      <section className="max-w-[470px] xl:max-w-none mx-auto flex flex-col xl:flex-row justify-center gap-5">
+        <div className=" border-[1px] border-gray-300 rounded-3xl p-4">
+          {cartItemData.map((item, index) => (
+            <React.Fragment key={index}>
+              <CartItem
+                imgSrc={`/images/${item.imgSrc}`}
+                title={item.title}
+                price={item.price}
+                quantity={item.quantity}
+                size={item.size}
+                color={item.color}
+              />
 
-            {index < cartItemData.length - 1 && (
-              <div className="bg-gray-300 h-[1px] my-3 mx-4" />
-            )}
-          </React.Fragment>
-        ))}
-      </section>
-      <section className="flex flex-col gap-3 font-satoshi text-[16px] border-[1px] border-gray-300 rounded-3xl p-4">
-        <span className="text-xl font-bold">Order Summary</span>
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-row justify-between">
-            <span className="text-black/60">Subtotal</span>
-            <span className="font-bold">$565</span>
-          </div>
-          <div className="flex flex-row justify-between">
-            <span className="text-black/60">Discount (20%)</span>
-            <span className="font-bold">$565</span>
-          </div>
-          <div className="flex flex-row justify-between">
-            <span className="text-black/60">Delivery Fee</span>
-            <span className="font-bold">$565</span>
-          </div>
-          <div className="bg-gray-300 h-[1px] my-3 mx-4" />
-          <div className="flex justify-between">
-            <span className="">Total</span>
-            <span className="text-xl font-bold">${totalPriceSum}</span>
-          </div>
-          <div className="flex flex-row items-center justify-between">
-            <div className="relative bg-gray-200 rounded-full p-3">
+              {index < cartItemData.length - 1 && (
+                <div className="bg-gray-300 h-[1px] my-3 mx-4" />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="flex flex-col w-full h-fit gap-3 font-satoshi text-[16px] xl:text-xl border-[1px] border-gray-300 rounded-3xl p-4">
+          <span className="text-xl xl:text-2xl font-bold">Order Summary</span>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-row justify-between">
+              <span className="text-black/60">Subtotal</span>
+              <span className="font-bold">${totalPriceSum}</span>
+            </div>
+            <div className="flex flex-row justify-between">
+              <span className="text-black/60">Discount (20%)</span>
+              <span className="font-bold text-red-600">-$565</span>
+            </div>
+            <div className="flex flex-row justify-between">
+              <span className="text-black/60">Delivery Fee</span>
+              <span className="font-bold">$565</span>
+            </div>
+            <div className="bg-gray-300 h-[1px] my-3 mx-4" />
+            <div className="flex justify-between">
+              <span className="">Total</span>
+              <span className="text-xl font-bold">${totalPriceSum}</span>
+            </div>
+            <div className="flex flex-row items-center justify-between">
+              <div className="relative bg-gray-200 rounded-full p-3">
+                <svg
+                  className="h-5 w-5 absolute top-[14px] left-[14px]"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19.2305 10.4047L11.4711 2.64532C11.3264 2.4997 11.1543 2.38424 10.9647 2.30565C10.775 2.22707 10.5717 2.18691 10.3664 2.18751H3.12501C2.87637 2.18751 2.63791 2.28628 2.46209 2.46209C2.28628 2.63791 2.18751 2.87637 2.18751 3.12501V10.3664C2.18691 10.5717 2.22707 10.775 2.30565 10.9647C2.38424 11.1543 2.4997 11.3264 2.64532 11.4711L10.4047 19.2305C10.6977 19.5234 11.0951 19.688 11.5094 19.688C11.9237 19.688 12.3211 19.5234 12.6141 19.2305L19.2305 12.6141C19.5234 12.3211 19.688 11.9237 19.688 11.5094C19.688 11.0951 19.5234 10.6977 19.2305 10.4047ZM11.5094 17.6836L4.06251 10.2344V4.06251H10.2344L17.6813 11.5094L11.5094 17.6836ZM7.81251 6.56251C7.81251 6.80973 7.7392 7.05141 7.60184 7.25697C7.46449 7.46253 7.26927 7.62275 7.04086 7.71736C6.81245 7.81197 6.56112 7.83672 6.31864 7.78849C6.07617 7.74026 5.85344 7.62121 5.67862 7.44639C5.50381 7.27157 5.38476 7.04885 5.33652 6.80637C5.28829 6.56389 5.31305 6.31256 5.40766 6.08415C5.50227 5.85574 5.66248 5.66052 5.86804 5.52317C6.07361 5.38582 6.31528 5.31251 6.56251 5.31251C6.89403 5.31251 7.21197 5.4442 7.44639 5.67862C7.68081 5.91304 7.81251 6.23099 7.81251 6.56251Z"
+                    fill="black"
+                    fillOpacity="0.4"
+                  />
+                </svg>
+                <input type="text" className="ml-8 -mr-24" />
+              </div>
+              <button className="font-medium bg-black text-white text-center py-3 px-6 rounded-full">
+                Apply
+              </button>
+            </div>
+            <button className="font-medium bg-black text-white flex flex-row items-center w-full justify-center py-3 rounded-full">
+              Go to Checkout
               <svg
-                className="h-5 w-5 absolute top-[14px] left-[14px]"
+                className="w-5 h-5 ml-2"
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M19.2305 10.4047L11.4711 2.64532C11.3264 2.4997 11.1543 2.38424 10.9647 2.30565C10.775 2.22707 10.5717 2.18691 10.3664 2.18751H3.12501C2.87637 2.18751 2.63791 2.28628 2.46209 2.46209C2.28628 2.63791 2.18751 2.87637 2.18751 3.12501V10.3664C2.18691 10.5717 2.22707 10.775 2.30565 10.9647C2.38424 11.1543 2.4997 11.3264 2.64532 11.4711L10.4047 19.2305C10.6977 19.5234 11.0951 19.688 11.5094 19.688C11.9237 19.688 12.3211 19.5234 12.6141 19.2305L19.2305 12.6141C19.5234 12.3211 19.688 11.9237 19.688 11.5094C19.688 11.0951 19.5234 10.6977 19.2305 10.4047ZM11.5094 17.6836L4.06251 10.2344V4.06251H10.2344L17.6813 11.5094L11.5094 17.6836ZM7.81251 6.56251C7.81251 6.80973 7.7392 7.05141 7.60184 7.25697C7.46449 7.46253 7.26927 7.62275 7.04086 7.71736C6.81245 7.81197 6.56112 7.83672 6.31864 7.78849C6.07617 7.74026 5.85344 7.62121 5.67862 7.44639C5.50381 7.27157 5.38476 7.04885 5.33652 6.80637C5.28829 6.56389 5.31305 6.31256 5.40766 6.08415C5.50227 5.85574 5.66248 5.66052 5.86804 5.52317C6.07361 5.38582 6.31528 5.31251 6.56251 5.31251C6.89403 5.31251 7.21197 5.4442 7.44639 5.67862C7.68081 5.91304 7.81251 6.23099 7.81251 6.56251Z"
-                  fill="black"
-                  fillOpacity="0.4"
+                  d="M11.9133 3.71169L17.5383 9.33669C17.6257 9.42379 17.695 9.52728 17.7423 9.64124C17.7897 9.75519 17.814 9.87737 17.814 10.0008C17.814 10.1241 17.7897 10.2463 17.7423 10.3603C17.695 10.4742 17.6257 10.5777 17.5383 10.6648L11.9133 16.2898C11.7372 16.4659 11.4983 16.5649 11.2492 16.5649C11.0001 16.5649 10.7613 16.4659 10.5852 16.2898C10.409 16.1137 10.3101 15.8748 10.3101 15.6258C10.3101 15.3767 10.409 15.1378 10.5852 14.9617L14.6094 10.9375L3.125 10.9375C2.87636 10.9375 2.6379 10.8387 2.46209 10.6629C2.28627 10.4871 2.1875 10.2486 2.1875 9.99997C2.1875 9.75133 2.28627 9.51288 2.46209 9.33706C2.6379 9.16125 2.87636 9.06247 3.125 9.06247L14.6094 9.06247L10.5844 5.03826C10.4083 4.86214 10.3093 4.62326 10.3093 4.37419C10.3093 4.12512 10.4083 3.88625 10.5844 3.71013C10.7605 3.53401 10.9994 3.43506 11.2484 3.43506C11.4975 3.43506 11.7364 3.53401 11.9125 3.71013L11.9133 3.71169Z"
+                  fill="white"
                 />
               </svg>
-              <input type="text" className="ml-8 -mr-24" />
-            </div>
-            <button className="font-medium bg-black text-white text-center py-3 px-6 rounded-full">
-              Apply
             </button>
           </div>
-          <button className="font-medium bg-black text-white flex flex-row items-center w-full justify-center py-3 rounded-full">
-            Go to Checkout
-            <svg
-              className="w-5 h-5 ml-2"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.9133 3.71169L17.5383 9.33669C17.6257 9.42379 17.695 9.52728 17.7423 9.64124C17.7897 9.75519 17.814 9.87737 17.814 10.0008C17.814 10.1241 17.7897 10.2463 17.7423 10.3603C17.695 10.4742 17.6257 10.5777 17.5383 10.6648L11.9133 16.2898C11.7372 16.4659 11.4983 16.5649 11.2492 16.5649C11.0001 16.5649 10.7613 16.4659 10.5852 16.2898C10.409 16.1137 10.3101 15.8748 10.3101 15.6258C10.3101 15.3767 10.409 15.1378 10.5852 14.9617L14.6094 10.9375L3.125 10.9375C2.87636 10.9375 2.6379 10.8387 2.46209 10.6629C2.28627 10.4871 2.1875 10.2486 2.1875 9.99997C2.1875 9.75133 2.28627 9.51288 2.46209 9.33706C2.6379 9.16125 2.87636 9.06247 3.125 9.06247L14.6094 9.06247L10.5844 5.03826C10.4083 4.86214 10.3093 4.62326 10.3093 4.37419C10.3093 4.12512 10.4083 3.88625 10.5844 3.71013C10.7605 3.53401 10.9994 3.43506 11.2484 3.43506C11.4975 3.43506 11.7364 3.53401 11.9125 3.71013L11.9133 3.71169Z"
-                fill="white"
-              />
-            </svg>
-          </button>
         </div>
       </section>
     </main>
