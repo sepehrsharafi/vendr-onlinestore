@@ -81,8 +81,10 @@ export default function Page() {
 
   return (
     <>
-      <main className="flex flex-row justify-center items-start gap-9 font-satoshi mx-4 w-fit xl:mx-auto">
-        <Filter />
+      <main className="max-w-[1103px] flex flex-row justify-center items-start gap-4 font-satoshi mx-4 w-fit xl:mx-auto">
+        <section className="hidden xl:block">
+          <Filter />
+        </section>
         <section className="flex flex-col w-fit">
           <section className="flex flex-row items-center justify-between my-3 w-full">
             <div className="flex flex-row items-baseline gap-2">
@@ -105,7 +107,7 @@ export default function Page() {
               </svg>
             </button>
           </section>
-          <div className="flex flex-wrap justify-between max-w-[1075px] gap-y-4 sm:justify-start sm:gap-x-4">
+          <div className="flex flex-wrap justify-between max-w-[1075px] gap-y-4 sm:justify-between">
             <Product
               imgSrc={"/images/a7234235e66d6695d9d7098fc3289872.png"}
               title={"Gradient Graphic T-shirt"}
