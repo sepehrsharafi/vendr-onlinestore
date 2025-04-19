@@ -123,7 +123,7 @@ export default function Page() {
   );
 
   return (
-    <main className="max-w-[1200px] mx-auto w-full px-4">
+    <main className="max-w-[1102px] mx-auto w-full px-4 xl:px-0">
       <h1 className="font-clash-display font-bold text-[32px] xl:text-[40px] mb-5 xl:mb-6">
         Your cart
       </h1>
