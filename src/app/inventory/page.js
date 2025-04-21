@@ -114,7 +114,7 @@ export default function Page() {
               rate={4}
               price={120}
               discountedPrice={140}
-            />{" "}
+            />
             <Product
               imgSrc={"/images/485b30fd30b3226e09bb8f8e494c260b.png"}
               title={"Polo with Tipping Details"}
