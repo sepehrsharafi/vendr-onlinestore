@@ -61,7 +61,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="font-satoshi">
+    <main className="font-satoshi max-w-[1102px] mx-auto">
       <ProductSection title={"NEW ARRIVALS"} products={products} />
       <div className="bg-gray-200 h-0.5 text-center mx-16 xl:mx-40 py-[1px] gap-2" />
       <ProductSection title={"TOP SELLING"} products={topSelling} />

@@ -12,14 +12,15 @@ export function Filter() {
   function ColorItem({ color }) {
     return (
       <span
-        className={`border-[2px] border-black/20 rounded-full bg-[${color}] w-full h-full`}
+        className="border-[2px] border-black/20 rounded-full w-full h-full"
+        style={{ backgroundColor: color }}
       ></span>
     );
   }
 
   function SizeItem({ size }) {
     return (
-      <span className="text-black/60 text-sm font-normal bg-gray-200 px-5 py-3 rounded-full">
+      <span className="text-black/60 text-sm font-normal bg-[#F0F0F0] px-5 py-3 rounded-full">
         {size}
       </span>
     );
@@ -145,14 +146,14 @@ export function Filter() {
         <div>
           <span className="text-xl font-bold mb-2 block">Colors</span>
           <div className="flex flex-col gap-3 my-4">
-            <div className="flex justify-evenly gap-4 h-10">
+            <div className="flex justify-evenly gap-4 h-9">
               <ColorItem color={"#00C12B"} />
               <ColorItem color={"#F50606"} />
               <ColorItem color={"#F5DD06"} />
               <ColorItem color={"#F57906"} />
               <ColorItem color={"#06CAF5"} />
             </div>
-            <div className="flex justify-evenly gap-4 h-10">
+            <div className="flex justify-evenly gap-4 h-9">
               <ColorItem color={"#662020"} />
               <ColorItem color={"#7D06F5"} />
               <ColorItem color={"#F506A4"} />
