@@ -83,7 +83,7 @@ export default function ProductSection({ title, products }) {
       <h1 className="font-clash-display text-[32px] xl:text-5xl font-bold text-center">
         {title}
       </h1>
-      <div className="flex w-full xl:w-fit overflow-x-auto px-7 flex-row mx-auto gap-12">
+      <div className="flex w-full xl:w-fit overflow-x-auto px-7 xl:px-0 flex-row mx-auto gap-6">
         {products.map((item, index) => (
           <Article
             key={index}
