@@ -34,8 +34,12 @@ export default function FilterMobile() {
   return (
     <>
       {isOpen && (
-        <div className="overflow-clip  z-50 ">
-          <div className="fixed bottom-0 left-0 flex flex-col gap-4 h-4/6 w-full overflow-auto p-5 bg-white rounded-t-3xl">
+        <div className="overflow-clip z-50">
+          <div className="absolute top-0 left-0 h-full bg-black/40 w-full" />
+          <div
+            style={{ scrollbarWidth: "none" }}
+            className="fixed bottom-0 left-0 flex flex-col gap-4 h-4/6 w-full overflow-auto p-5 bg-white rounded-t-3xl"
+          >
             <div className="w-full  flex flex-row items-center justify-between">
               <span className="text-xl font-bold">Filters</span>
               <svg
@@ -181,6 +185,9 @@ export default function FilterMobile() {
                 <SizeItem size="4X-Large" />
               </div>
             </div>
+            <button className="text-lg font-medium bg-black w-full text-white py-4 rounded-full">
+              Apply
+            </button>
           </div>
         </div>
       )}

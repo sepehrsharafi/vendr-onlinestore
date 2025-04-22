@@ -159,7 +159,6 @@ export default function Header() {
               <span>On Sale</span>
             </Link>
             <Link href={`/inventory`}>
-              {" "}
               <span>New Arrivals</span>
             </Link>
             <Link href={`/inventory`}>
@@ -172,7 +171,7 @@ export default function Header() {
                 <input
                   type="text"
                   placeholder="Search for products..."
-                  className="pr-4 pl-12 py-3 text-sm text-slate-900 rounded w-full outline-[#333]"
+                  className="pr-4 pl-12 py-3 text-sm text-slate-900 rounded w-full outline-0"
                 />
 
                 <div className="absolute left-4">
