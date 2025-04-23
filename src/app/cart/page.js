@@ -4,8 +4,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 export default function Page() {
-  // Calculate total price sum before rendering
-
   function CartItem({ imgSrc, title, price, quantity, size, color }) {
     let [itemQuantity, setItemQuantity] = useState(quantity);
 
