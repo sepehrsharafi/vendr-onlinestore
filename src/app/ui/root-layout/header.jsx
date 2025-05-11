@@ -12,6 +12,10 @@ export default function Header() {
 
   return (
     <>
+      <div className="flex row justify-center items-center bg-black text-white py-1">
+        <span>Sign up and get 20% off to your first order.</span>
+        <span className="font-medium underline ">Sign Up Now</span>
+      </div>
       {isOpen && (
         <section className="font-satoshi absolute w-full h-full bg-gray-50/60 backdrop-blur-xl">
           <svg
@@ -112,10 +116,6 @@ export default function Header() {
         </div>
       </header>
       <header className="font-satoshi hidden xl:block w-full mb-4">
-        <div className="flex row justify-center items-center bg-[#000000] text-white py-1">
-          <span>Sign up and get 20% off to your first order.</span>
-          <span className="font-medium underline ">Sign Up Now</span>
-        </div>
         <div className="border-b-[1px] border-gray-300 max-w-[1102px] mx-auto w-full flex flex-row justify-between items-center py-[22px] text-base font-normal">
           <Link href={`/`}>
             <svg
