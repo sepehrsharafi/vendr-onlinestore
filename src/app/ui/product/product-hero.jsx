@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import ReviewCart from "./review-cart";
+import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
 import ProductDetails from "../product-details";
 
 export default function ProductHero({ product, products }) {
@@ -12,6 +14,11 @@ export default function ProductHero({ product, products }) {
 
   function changeSizeBtnColor(selectedSize) {
     setSelectedSize(selectedSize);
+  }
+  function calculateAverageRating(reviews) {
+    if (!reviews || reviews.length === 0) return 0;
+    const sum = reviews.reduce((total, review) => total + review.rating, 0);
+    return (sum / reviews.length).toFixed(1);
   }
 
   function handleColorSelect(color) {
@@ -62,76 +69,29 @@ export default function ProductHero({ product, products }) {
             One Life Graphic shirt
           </span>
           <div className="flex flex-row gap-2 mt-3">
-            <div className="gap-1.5 flex flex-row">
-              <svg
-                width="25"
-                height="23"
-                viewBox="0 0 25 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.3562 0.143784L15.8569 7.68174L24.1077 8.68172L18.0204 14.3404L19.619 22.4964L12.3562 18.4557L5.09341 22.4964L6.69201 14.3404L0.604756 8.68172L8.85555 7.68174L12.3562 0.143784Z"
-                  fill="#FFC633"
-                />
-              </svg>
-              <svg
-                width="25"
-                height="23"
-                viewBox="0 0 25 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.3562 0.143784L15.8569 7.68174L24.1077 8.68172L18.0204 14.3404L19.619 22.4964L12.3562 18.4557L5.09341 22.4964L6.69201 14.3404L0.604756 8.68172L8.85555 7.68174L12.3562 0.143784Z"
-                  fill="#FFC633"
-                />
-              </svg>
-              <svg
-                width="25"
-                height="23"
-                viewBox="0 0 25 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.3562 0.143784L15.8569 7.68174L24.1077 8.68172L18.0204 14.3404L19.619 22.4964L12.3562 18.4557L5.09341 22.4964L6.69201 14.3404L0.604756 8.68172L8.85555 7.68174L12.3562 0.143784Z"
-                  fill="#FFC633"
-                />
-              </svg>
-              <svg
-                width="25"
-                height="23"
-                viewBox="0 0 25 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.3562 0.143784L15.8569 7.68174L24.1077 8.68172L18.0204 14.3404L19.619 22.4964L12.3562 18.4557L5.09341 22.4964L6.69201 14.3404L0.604756 8.68172L8.85555 7.68174L12.3562 0.143784Z"
-                  fill="#FFC633"
-                />
-              </svg>
-              <svg
-                width="12"
-                height="23"
-                viewBox="0 0 12 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4.73719 22.4964L12 18.4557V0.143784L8.49932 7.68174L0.248535 8.68172L6.33579 14.3404L4.73719 22.4964Z"
-                  fill="#FFC633"
-                />
-              </svg>
+            <div className="flex flex-row gap-1.5 ">
+              <Rating
+                name="text-feedback"
+                value={calculateAverageRating(product.reviews)}
+                precision={0.5}
+                readOnly
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+              />
             </div>
             <div className="flex flex-row font-Satoshi">
-              <span className="text-black "> 4.5/</span>
+              <span className="text-black ">
+                {calculateAverageRating(product.reviews)}/
+              </span>
               <span className="text-black/60 "> 5</span>
             </div>
           </div>
           <div className="flex flex-row items-center text-2xl font-bold font-Satoshi gap-2 mt-3">
-            <span className="text-black ">$260</span>
-            <span className="text-gray-300 line-through">$300</span>
+            <span className="text-black ">${product.price}</span>
+            <span className="text-gray-300 line-through">
+              ${product.discountedPrice}
+            </span>
             <span className="px-2 py-1 text-red-500 text-sm font-medium bg-red-500/10 rounded-[62px]">
               -40%
             </span>

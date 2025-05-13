@@ -36,8 +36,8 @@ export default function Product() {
       "/images/7cc557f42cf1d489f7cc811856b90e9f.png",
     ],
     quantity: 5,
-    title: "T-SHIRT WITH TAPE DETAILS",
     price: 120,
+    discountedPrice: 160,
     size: "Large",
     color: [
       { darkGreen: "#4F4631" },
@@ -60,7 +60,7 @@ export default function Product() {
         publishedDate: "2023-05-22",
       },
       {
-        rating: 3.5,
+        rating: 2,
         author: "John Doe",
         review:
           "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt.",
