@@ -20,6 +20,9 @@ export default function ProductHero({ product, products }) {
     const sum = reviews.reduce((total, review) => total + review.rating, 0);
     return (sum / reviews.length).toFixed(1);
   }
+  function calculateDiscountedPrice(price, salePercentage) {
+    return price - (price * salePercentage) / 100;
+  }
 
   function handleColorSelect(color) {
     setSelectedColor(color);
@@ -88,13 +91,21 @@ export default function ProductHero({ product, products }) {
             </div>
           </div>
           <div className="flex flex-row items-center text-2xl font-bold font-Satoshi gap-2 mt-3">
-            <span className="text-black ">${product.price}</span>
-            <span className="text-gray-300 line-through">
-              ${product.discountedPrice}
-            </span>
-            <span className="px-2 py-1 text-red-500 text-sm font-medium bg-red-500/10 rounded-[62px]">
-              -40%
-            </span>
+            {product.discountedPrice ? (
+              <div className="flex flex-row items-center text-2xl gap-x-2">
+                <span className="text-gray-400 line-through">
+                  ${product.price}
+                </span>
+                <span className="text-black">${product.discountedPrice}</span>
+              </div>
+            ) : (
+              <span>${product.price}</span>
+            )}
+            {product.sale && (
+              <span className="px-2 py-1 text-red-500 text-sm font-medium bg-red-500/10 rounded-[62px]">
+                {product.sale}%
+              </span>
+            )}
           </div>
           <p className="text-sm font-normal text-black/60 mt-3">
             This graphic t-shirt which is perfect for any occasion. Crafted from

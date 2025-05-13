@@ -1,19 +1,22 @@
 import ProductHero from "../ui/product/product-hero";
 
 export default function Product() {
+  function calculateDiscountedPrice(price, salePercentage) {
+    return price - (price * salePercentage) / 100;
+  }
   const products = [
     {
       imgSrc: "/images/5fc84f87eeac1062fbe47f49c192d4f2.png",
       title: "T-SHIRT WITH TAPE DETAILS",
       rate: 4.5,
       price: 120,
+      sale: 10,
     },
     {
       imgSrc: "/images/7cc557f42cf1d489f7cc811856b90e9f.png",
       title: "SKINNY FIT JEANS",
       rate: 4.5,
       price: 240,
-      discountedPrice: 260,
     },
     {
       imgSrc: "/images/a7234235e66d6695d9d7098fc3289872.png",
@@ -26,9 +29,17 @@ export default function Product() {
       title: "SLEEVE STRIPED T-SHIRT",
       rate: 4.5,
       price: 130,
-      discountedPrice: 160,
+      sale: 20,
     },
-  ];
+  ].map((product) => {
+    if (product.sale) {
+      return {
+        ...product,
+        discountedPrice: calculateDiscountedPrice(product.price, product.sale),
+      };
+    }
+    return product;
+  });
   const productItem = {
     imgSrc: [
       "/images/a7234235e66d6695d9d7098fc3289872.png",
@@ -37,7 +48,7 @@ export default function Product() {
     ],
     quantity: 5,
     price: 120,
-    discountedPrice: 160,
+    sale: 40,
     size: "Large",
     color: [
       { darkGreen: "#4F4631" },
@@ -68,9 +79,20 @@ export default function Product() {
       },
     ],
   };
+
+  const processedProductItem = productItem.sale
+    ? {
+        ...productItem,
+        discountedPrice: calculateDiscountedPrice(
+          productItem.price,
+          productItem.sale
+        ),
+      }
+    : productItem;
+
   return (
     <main className="font-satoshi max-w-[1103px] mx-auto p-5">
-      <ProductHero product={productItem} products={products} />
+      <ProductHero product={processedProductItem} products={products} />
     </main>
   );
 }
