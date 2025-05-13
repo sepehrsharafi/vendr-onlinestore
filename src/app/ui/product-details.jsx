@@ -70,11 +70,21 @@ export default function ProductDetails({
             <span>{rate}</span>
           </div>
         </div>
-        <div className="text-xl xl:text-2xl font-bold">
+        {/* <div className="text-xl xl:text-2xl font-bold">
           <span>${price}</span>
           <span className="ml-2 text-gray-400 line-through">
             {discountedPrice}
           </span>
+        </div> */}
+        <div className="text-xl xl:text-2xl font-bold">
+          {discountedPrice ? (
+            <>
+              <span className="text-gray-400 line-through">${price}</span>
+              <span className="ml-2 text-black">${discountedPrice}</span>
+            </>
+          ) : (
+            <span>${price}</span>
+          )}
         </div>
       </div>
     </article>
