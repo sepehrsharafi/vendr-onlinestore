@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ProductSection from "./ui/product-section";
+import HeroSection from "././ui/home/hero-section";
 import Browse from "./ui/browse-section";
 
 export default function Home() {
@@ -62,6 +63,7 @@ export default function Home() {
 
   return (
     <main className="font-satoshi max-w-[1102px] mx-auto">
+      <HeroSection />
       <ProductSection title={"NEW ARRIVALS"} products={products} />
       <div className="bg-gray-200 h-0.5 text-center mx-16 xl:mx-40 py-[1px] gap-2" />
       <ProductSection title={"TOP SELLING"} products={topSelling} />

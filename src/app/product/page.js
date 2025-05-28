@@ -15,7 +15,7 @@ export default function Product() {
     {
       imgSrc: "/images/7cc557f42cf1d489f7cc811856b90e9f.png",
       title: "SKINNY FIT JEANS",
-      rate: 4.5,
+      rate: 4,
       price: 240,
     },
     {

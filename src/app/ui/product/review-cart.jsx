@@ -2,7 +2,6 @@ import * as React from "react";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 export default function ProductHero({ review }) {
-  const [value, setValue] = React.useState(2);
   return (
     <article className="rounded-[20px] outline  outline-black/10 p-6 gap-3 flex flex-col w-full">
       <div className="flex flex-row gap-1.5 ">
