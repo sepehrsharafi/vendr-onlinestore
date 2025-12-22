@@ -2,29 +2,48 @@
 import * as React from "react";
 import Slider from "@mui/material/Slider";
 
-export function Filter() {
+export function Filter({
+  selectedCategory,
+  setSelectedCategory,
+  priceRange,
+  setPriceRange,
+  selectedColor,
+  setSelectedColor,
+  selectedSize,
+  setSelectedSize,
+}) {
   const [value, setValue] = React.useState([20, 37]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handlePriceChange = (event, newValue) => {
+    setPriceRange(newValue);
+  };
+
   function ColorItem({ color }) {
     return (
       <span
-        className="border-[2px] border-black/20 rounded-full w-full h-full"
+        className={`border-[2px] border-black/20 rounded-full w-full h-full cursor-pointer ${selectedColor === color ? "ring-2 ring-black" : ""}`}
         style={{ backgroundColor: color }}
+        onClick={() => setSelectedColor(color)}
       ></span>
     );
   }
 
   function SizeItem({ size }) {
     return (
-      <span className="text-black/60 text-sm font-normal bg-[#F0F0F0] px-5 py-3 rounded-full">
+      <span
+        className={`text-black/60 text-sm font-normal bg-[#F0F0F0] px-5 py-3 rounded-full cursor-pointer ${selectedSize === size ? "bg-black text-white" : ""}`}
+        onClick={() => setSelectedSize(size)}
+      >
         {size}
       </span>
     );
   }
+
+  const categories = ["T-shirts", "Shorts", "Shirts", "Hoodie", "Jeans"];
 
   return (
     <div className="border-[1px] border-gray-300 rounded-2xl px-5">
@@ -47,99 +66,43 @@ export function Filter() {
         </div>
         <div className="self-stretch h-0 outline-[1px] mx-4 outline-offset-[-0.20px] outline-black/10"></div>
         <div className="flex flex-col text-[16px] text-black/60 gap-3">
-          <div className="flex flex-row justify-between">
-            T-shirts
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          {categories.map((cat) => (
+            <div
+              key={cat}
+              className={`flex flex-row justify-between cursor-pointer ${selectedCategory === cat ? "font-bold text-black" : ""}`}
+              onClick={() => setSelectedCategory(cat)}
             >
-              <path
-                d="M6.53073 2.55958L11.5307 7.55958C11.6007 7.62926 11.6561 7.71205 11.694 7.80322C11.7318 7.89438 11.7513 7.99212 11.7513 8.09083C11.7513 8.18954 11.7318 8.28728 11.694 8.37845C11.6561 8.46961 11.6007 8.5524 11.5307 8.62208L6.53073 13.6221C6.38984 13.763 6.19874 13.8421 5.99948 13.8421C5.80023 13.8421 5.60913 13.763 5.46823 13.6221C5.32734 13.4812 5.24818 13.2901 5.24818 13.0908C5.24818 12.8916 5.32734 12.7005 5.46823 12.5596L9.93761 8.09021L5.46761 3.62083C5.32671 3.47994 5.24756 3.28884 5.24756 3.08958C5.24756 2.89032 5.32671 2.69923 5.46761 2.55833C5.60851 2.41744 5.7996 2.33828 5.99886 2.33828C6.19812 2.33828 6.38921 2.41744 6.53011 2.55833L6.53073 2.55958Z"
-                fill="black"
-                fillOpacity="0.6"
-              />
-            </svg>
-          </div>
-          <div className="flex flex-row justify-between">
-            Shorts
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.53073 2.55958L11.5307 7.55958C11.6007 7.62926 11.6561 7.71205 11.694 7.80322C11.7318 7.89438 11.7513 7.99212 11.7513 8.09083C11.7513 8.18954 11.7318 8.28728 11.694 8.37845C11.6561 8.46961 11.6007 8.5524 11.5307 8.62208L6.53073 13.6221C6.38984 13.763 6.19874 13.8421 5.99948 13.8421C5.80023 13.8421 5.60913 13.763 5.46823 13.6221C5.32734 13.4812 5.24818 13.2901 5.24818 13.0908C5.24818 12.8916 5.32734 12.7005 5.46823 12.5596L9.93761 8.09021L5.46761 3.62083C5.32671 3.47994 5.24756 3.28884 5.24756 3.08958C5.24756 2.89032 5.32671 2.69923 5.46761 2.55833C5.60851 2.41744 5.7996 2.33828 5.99886 2.33828C6.19812 2.33828 6.38921 2.41744 6.53011 2.55833L6.53073 2.55958Z"
-                fill="black"
-                fillOpacity="0.6"
-              />
-            </svg>
-          </div>
-          <div className="flex flex-row justify-between">
-            Shirts
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.53073 2.55958L11.5307 7.55958C11.6007 7.62926 11.6561 7.71205 11.694 7.80322C11.7318 7.89438 11.7513 7.99212 11.7513 8.09083C11.7513 8.18954 11.7318 8.28728 11.694 8.37845C11.6561 8.46961 11.6007 8.5524 11.5307 8.62208L6.53073 13.6221C6.38984 13.763 6.19874 13.8421 5.99948 13.8421C5.80023 13.8421 5.60913 13.763 5.46823 13.6221C5.32734 13.4812 5.24818 13.2901 5.24818 13.0908C5.24818 12.8916 5.32734 12.7005 5.46823 12.5596L9.93761 8.09021L5.46761 3.62083C5.32671 3.47994 5.24756 3.28884 5.24756 3.08958C5.24756 2.89032 5.32671 2.69923 5.46761 2.55833C5.60851 2.41744 5.7996 2.33828 5.99886 2.33828C6.19812 2.33828 6.38921 2.41744 6.53011 2.55833L6.53073 2.55958Z"
-                fill="black"
-                fillOpacity="0.6"
-              />
-            </svg>
-          </div>
-          <div className="flex flex-row justify-between">
-            Hoodie
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.53073 2.55958L11.5307 7.55958C11.6007 7.62926 11.6561 7.71205 11.694 7.80322C11.7318 7.89438 11.7513 7.99212 11.7513 8.09083C11.7513 8.18954 11.7318 8.28728 11.694 8.37845C11.6561 8.46961 11.6007 8.5524 11.5307 8.62208L6.53073 13.6221C6.38984 13.763 6.19874 13.8421 5.99948 13.8421C5.80023 13.8421 5.60913 13.763 5.46823 13.6221C5.32734 13.4812 5.24818 13.2901 5.24818 13.0908C5.24818 12.8916 5.32734 12.7005 5.46823 12.5596L9.93761 8.09021L5.46761 3.62083C5.32671 3.47994 5.24756 3.28884 5.24756 3.08958C5.24756 2.89032 5.32671 2.69923 5.46761 2.55833C5.60851 2.41744 5.7996 2.33828 5.99886 2.33828C6.19812 2.33828 6.38921 2.41744 6.53011 2.55833L6.53073 2.55958Z"
-                fill="black"
-                fillOpacity="0.6"
-              />
-            </svg>
-          </div>
-          <div className="flex flex-row justify-between">
-            Jeans
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.53073 2.55958L11.5307 7.55958C11.6007 7.62926 11.6561 7.71205 11.694 7.80322C11.7318 7.89438 11.7513 7.99212 11.7513 8.09083C11.7513 8.18954 11.7318 8.28728 11.694 8.37845C11.6561 8.46961 11.6007 8.5524 11.5307 8.62208L6.53073 13.6221C6.38984 13.763 6.19874 13.8421 5.99948 13.8421C5.80023 13.8421 5.60913 13.763 5.46823 13.6221C5.32734 13.4812 5.24818 13.2901 5.24818 13.0908C5.24818 12.8916 5.32734 12.7005 5.46823 12.5596L9.93761 8.09021L5.46761 3.62083C5.32671 3.47994 5.24756 3.28884 5.24756 3.08958C5.24756 2.89032 5.32671 2.69923 5.46761 2.55833C5.60851 2.41744 5.7996 2.33828 5.99886 2.33828C6.19812 2.33828 6.38921 2.41744 6.53011 2.55833L6.53073 2.55958Z"
-                fill="black"
-                fillOpacity="0.6"
-              />
-            </svg>
-          </div>
+              {cat}
+              <svg
+                width="16"
+                height="17"
+                viewBox="0 0 16 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.53073 2.55958L11.5307 7.55958C11.6007 7.62926 11.6561 7.71205 11.694 7.80322C11.7318 7.89438 11.7513 7.99212 11.7513 8.09083C11.7513 8.18954 11.7318 8.28728 11.694 8.37845C11.6561 8.46961 11.6007 8.5524 11.5307 8.62208L6.53073 13.6221C6.38984 13.763 6.19874 13.8421 5.99948 13.8421C5.80023 13.8421 5.60913 13.763 5.46823 13.6221C5.32734 13.4812 5.24818 13.2901 5.24818 13.0908C5.24818 12.8916 5.32734 12.7005 5.46823 12.5596L9.93761 8.09021L5.46761 3.62083C5.32671 3.47994 5.24756 3.28884 5.24756 3.08958C5.24756 2.89032 5.32671 2.69923 5.46761 2.55833C5.60851 2.41744 5.7996 2.33828 5.99886 2.33828C6.19812 2.33828 6.38921 2.41744 6.53011 2.55833L6.53073 2.55958Z"
+                  fill="black"
+                  fillOpacity="0.6"
+                />
+              </svg>
+            </div>
+          ))}
         </div>
         <div className="self-stretch h-0 outline-[1px] mx-3 outline-offset-[-0.20px] outline-black/10"></div>
         <div>
           <span className="text-xl font-bold mb-2 block">Price</span>
           <div className="flex justify-between text-base font-medium">
-            {<span>${value[0]}</span>}
-            {<span>${value[1]}</span>}
+            <span>${priceRange[0]}</span>
+            <span>${priceRange[1]}</span>
           </div>
           <Slider
             getAriaLabel={() => "Temperature range"}
-            value={value}
-            onChange={handleChange}
+            value={priceRange}
+            onChange={handlePriceChange}
             valueLabelDisplay="auto"
+            min={0}
+            max={1000}
           />
         </div>
         <div className="self-stretch h-0 outline-[1px] mx-3 outline-offset-[-0.20px] outline-black/10"></div>

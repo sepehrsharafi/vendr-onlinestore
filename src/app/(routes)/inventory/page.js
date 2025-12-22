@@ -1,8 +1,85 @@
+"use client"
+
 import Image from "next/image";
+import { useState } from "react";
 import { Filter } from "@/app/ui/filter-box";
 import FilterMobile from "@/app/ui/filter-mobile";
 
+const products = [
+  {
+    imgSrc: "/images/a7234235e66d6695d9d7098fc3289872.png",
+    title: "Gradient Graphic T-shirt",
+    rate: 4,
+    price: 120,
+    discountedPrice: 140,
+    category: "T-shirts",
+    color: "#F5DD06",
+    size: "Medium",
+  },
+
+  {
+      imgSrc: "/images/4a66d9ca1401101dee4cc689f8bb5ad2.png",
+      title: "Gradient Graphic T-shirt",
+      price: 145,
+      quantity: 5,
+     category: "T-shirts",
+    color: "#662020",
+    size: "Large",
+    },
+    {
+      imgSrc: "/images/5fc84f87eeac1062fbe47f49c192d4f2.png",
+      title: "Checkered Shirt",
+      price: 180,
+      quantity: 5,
+    category: "T-shirts",
+    color: "#7D06F5",
+    size: "X-Large",
+    },
+
+        {
+      imgSrc: "/images/ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+        category: "T-shirts",
+    color: "#F506A4",
+    size: "2X-Large",
+    },
+        {
+      imgSrc: "/images/ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+    category: "T-shirts",
+    color: "#000000",
+    size: "3X-Large",
+    },
+            {
+      imgSrc: "/images/ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+        category: "T-shirts",
+    color: "#F5DD06",
+    size: "4X-Large",
+    },
+];
+
 export default function Page() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [priceRange, setPriceRange] = useState([20, 300]);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const filteredProducts = products.filter((product) => {
+    let match = true;
+    if (selectedCategory) match = match && product.category === selectedCategory;
+    if (selectedColor) match = match && product.color === selectedColor;
+    if (selectedSize) match = match && product.size === selectedSize;
+    match = match && product.price >= priceRange[0] && product.price <= priceRange[1];
+    return match;
+  });
+
   function Product({ imgSrc, title, rate, price, discountedPrice }) {
     return (
       <article className="flex flex-col gap-1 xl:gap-2 w-[47%] sm:w-40 xl:w-64 ">
@@ -64,10 +141,6 @@ export default function Page() {
                 />
               </svg>
             </div>
-            <div className="flex flex-row items-center text-[12px] xl:text-[14px]">
-              <span>{rate}/</span>
-              <span className="text-gray-600">5</span>
-            </div>
           </div>
           <div className="font-bold text-xl xl:text-2xl">
             <span>${price}</span>
@@ -84,7 +157,16 @@ export default function Page() {
     <>
       <main className="max-w-[1103px] flex flex-row justify-center items-start gap-4 font-satoshi mx-4 w-fit xl:mx-auto lg:mt-10">
         <section className="hidden xl:block">
-          <Filter />
+          <Filter
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+          />
         </section>
         <section className="flex flex-col w-fit">
           <section className="flex flex-row items-center justify-between my-3 w-full">
@@ -97,46 +179,9 @@ export default function Page() {
             <FilterMobile />
           </section>
           <div className="flex flex-wrap justify-evenly lg:justify-between max-w-[1075px] gap-4 mx-auto">
-            <Product
-              imgSrc={"/images/a7234235e66d6695d9d7098fc3289872.png"}
-              title={"Gradient Graphic T-shirt"}
-              rate={4}
-              price={120}
-              discountedPrice={140}
-            />
-            <Product
-              imgSrc={"/images/485b30fd30b3226e09bb8f8e494c260b.png"}
-              title={"Polo with Tipping Details"}
-              rate={4.5}
-              price={180}
-            />
-            <Product
-              imgSrc={"/images/ff941dde9bc0e54431b8d8fe3182f5e9.png"}
-              title={"Skinny Fit Jeans"}
-              rate={3.5}
-              price={260}
-              discountedPrice={340}
-            />
-            <Product
-              imgSrc={"/images/12942762aefb7c7ac954e78b76284504.png"}
-              title={"Black Striped T-shirt"}
-              rate={4}
-              price={120}
-              discountedPrice={150}
-            />
-            <Product
-              imgSrc={"/images/5fc84f87eeac1062fbe47f49c192d4f2.png"}
-              title={"CHECKERED SHIRT"}
-              rate={4}
-              price={180}
-            />
-            <Product
-              imgSrc={"/images/7cc557f42cf1d489f7cc811856b90e9f.png"}
-              title={"Sleeve Striped T-shirt"}
-              rate={4}
-              price={130}
-              discountedPrice={180}
-            />
+            {filteredProducts.map((product, idx) => (
+              <Product key={idx} {...product} />
+            ))}
           </div>
         </section>
       </main>
