@@ -79,20 +79,9 @@ export default function Product() {
       },
     ],
   };
-
-  const processedProductItem = productItem.sale
-    ? {
-        ...productItem,
-        discountedPrice: calculateDiscountedPrice(
-          productItem.price,
-          productItem.sale
-        ),
-      }
-    : productItem;
-
   return (
-    <main className="font-satoshi max-w-[1103px] mx-auto p-5 2xl:w-full 2xl:max-w-full">
-      <ProductHero product={processedProductItem} products={products} />
+    <main className="font-satoshi max-w-[1103px] mx-auto p-5">
+      <ProductHero product={productItem} products={products} />
     </main>
   );
 }

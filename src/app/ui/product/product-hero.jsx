@@ -20,6 +20,9 @@ export default function ProductHero({ product, products }) {
     const sum = reviews.reduce((total, review) => total + review.rating, 0);
     return (sum / reviews.length).toFixed(1);
   }
+  function calculateDiscountedPrice(price, salePercentage) {
+    return price - (price * salePercentage) / 100;
+  }
 
   function handleColorSelect(color) {
     setSelectedColor(color);
