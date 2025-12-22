@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 
-// Configure the Satoshi font using next/font/local
 export const satoshi = localFont({
   src: [
     {
