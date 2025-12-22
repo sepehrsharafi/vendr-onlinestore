@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import ProductSection from "./ui/product-section";
 import HeroSection from "././ui/home/hero-section";
 import Browse from "./ui/browse-section";
