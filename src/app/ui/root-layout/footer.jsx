@@ -5,9 +5,9 @@ export default function Footer() {
         <span className="text-[14px] block md:pb-2 font-medium tracking-[.25em] ">
           {title}
         </span>
-        <ul className="flex flex-col gap-[10px] text-black/60">
+        <ul className="flex flex-col gap-[10px] text-black/60 ">
           {children.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index} className="hover:font-bold cursor-pointer transition-all">{item} </li>
           ))}
         </ul>
       </article>
@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="w-full">
+      <footer className="w-full 2xl:w-full 2xl:max-w-full">
         <div className="relative -bottom-28 flex flex-col justify-between lg:flex-row gap-4 bg-black mx-5 px-7 py-7 pb-7 rounded-[24px] max-w-[1200px] xl:mx-auto">
           <span className="font-clash-display font-bold text-[32px] xl:text-[40px] block my-auto text-white tracking-wider">
             STAY UP TO DATE
@@ -144,6 +144,7 @@ export default function Footer() {
                 children={["About", "Features", "Works", "Career"]}
               />
               <Article
+              
                 title={"HELP"}
                 children={[
                   "Customer Support",
@@ -151,7 +152,7 @@ export default function Footer() {
                   "Terms & Conditions",
                   "Privacy Policy",
                 ]}
-              />
+               />
               <Article
                 title={"FAQ"}
                 children={["Account", "Manage Deliveries", "Orders", "Payment"]}

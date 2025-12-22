@@ -41,7 +41,7 @@ export default function ProductHero({ product, products }) {
   return (
     <section className="flex flex-col xl:flex-col gap-4 ">
       <div className="flex flex-col xl:flex xl:flex-row gap-10">
-        <div className="w-full flex flex-col-reverse gap-4 xl:flex-row xl:h-full">
+        <div className="w-full flex flex-col-reverse gap-4 xl:flex-row xl:h-full 2xl:justify-center 2xl:flex-row">
           <div className="flex flex-row xl:flex-col gap-4 justify-between ">
             {product.imgSrc.map((item, index) => (
               <Image

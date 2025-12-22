@@ -4,19 +4,83 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 export default function Page() {
-  function CartItem({ imgSrc, title, price, quantity, size, color }) {
-    let [itemQuantity, setItemQuantity] = useState(quantity);
+  const [cartItemData, setCartItemData] = useState([
+    {
+      imgSrc: "4a66d9ca1401101dee4cc689f8bb5ad2.png",
+      title: "Gradient Graphic T-shirt",
+      price: 145,
+      quantity: 5,
+      size: "Large",
+      color: "White",
+    },
+    {
+      imgSrc: "5fc84f87eeac1062fbe47f49c192d4f2.png",
+      title: "Checkered Shirt",
+      price: 180,
+      quantity: 5,
+      size: "Medium",
+      color: "Red",
+    },
 
-    function incrimentQuantity() {
-      setItemQuantity(itemQuantity + 1);
-      console.log("item up");
-    }
+        {
+      imgSrc: "ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+      size: "Large",
+      color: "Blue",
+    },
+        {
+      imgSrc: "ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+      size: "Large",
+      color: "Blue",
+    },
+            {
+      imgSrc: "ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+      size: "Large",
+      color: "Blue",
+    },
 
-    function substractQuantity() {
-      if (itemQuantity > 1) {
-        setItemQuantity(itemQuantity - 1);
-      }
-    }
+            {
+      imgSrc: "ff941dde9bc0e54431b8d8fe3182f5e9.png",
+      title: "Skinny Fit Jeans",
+      price: 240,
+      quantity: 50,
+      size: "Large",
+      color: "Blue",
+    },
+
+  ]);
+
+  function handleRemove(index) {
+    setCartItemData(prev => prev.filter((_, i) => i !== index));
+  }
+
+  function incrementQuantity(index) {
+    setCartItemData(prev =>
+      prev.map((item, i) =>
+        i === index ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  }
+
+  function decrementQuantity(index) {
+    setCartItemData(prev =>
+      prev.map((item, i) =>
+        i === index && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  }
+
+  function CartItem({ imgSrc, title, price, quantity, size, color, onRemove, onIncrement, onDecrement }) {
 
     return (
       <article className="font-satoshi flex flex-row items-center justify-between gap-3 w-full xl:min-w-[587px]">
@@ -32,17 +96,19 @@ export default function Page() {
             <span className="text-[16px] xl:text-xl font-bold line-clamp-1">
               {title}
             </span>
-            <svg
-              className="w-6 h-6"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16.875 3.75H13.75V3.125C13.75 2.62772 13.5525 2.15081 13.2008 1.79917C12.8492 1.44754 12.3723 1.25 11.875 1.25H8.125C7.62772 1.25 7.15081 1.44754 6.79917 1.79917C6.44754 2.15081 6.25 2.62772 6.25 3.125V3.75H3.125C2.95924 3.75 2.80027 3.81585 2.68306 3.93306C2.56585 4.05027 2.5 4.20924 2.5 4.375C2.5 4.54076 2.56585 4.69973 2.68306 4.81694C2.80027 4.93415 2.95924 5 3.125 5H3.75V16.25C3.75 16.5815 3.8817 16.8995 4.11612 17.1339C4.35054 17.3683 4.66848 17.5 5 17.5H15C15.3315 17.5 15.6495 17.3683 15.8839 17.1339C16.1183 16.8995 16.25 16.5815 16.25 16.25V5H16.875C17.0408 5 17.1997 4.93415 17.3169 4.81694C17.4342 4.69973 17.5 4.54076 17.5 4.375C17.5 4.20924 17.4342 4.05027 17.3169 3.93306C17.1997 3.81585 17.0408 3.75 16.875 3.75ZM8.75 13.125C8.75 13.2908 8.68415 13.4497 8.56694 13.5669C8.44973 13.6842 8.29076 13.75 8.125 13.75C7.95924 13.75 7.80027 13.6842 7.68306 13.5669C7.56585 13.4497 7.5 13.2908 7.5 13.125V8.125C7.5 7.95924 7.56585 7.80027 7.68306 7.68306C7.80027 7.56585 7.95924 7.5 8.125 7.5C8.29076 7.5 8.44973 7.56585 8.56694 7.68306C8.68415 7.80027 8.75 7.95924 8.75 8.125V13.125ZM12.5 13.125C12.5 13.2908 12.4342 13.4497 12.3169 13.5669C12.1997 13.6842 12.0408 13.75 11.875 13.75C11.7092 13.75 11.5503 13.6842 11.4331 13.5669C11.3158 13.4497 11.25 13.2908 11.25 13.125V8.125C11.25 7.95924 11.3158 7.80027 11.4331 7.68306C11.5503 7.56585 11.7092 7.5 11.875 7.5C12.0408 7.5 12.1997 7.56585 12.3169 7.68306C12.4342 7.80027 12.5 7.95924 12.5 8.125V13.125ZM12.5 3.75H7.5V3.125C7.5 2.95924 7.56585 2.80027 7.68306 2.68306C7.80027 2.56585 7.95924 2.5 8.125 2.5H11.875C12.0408 2.5 12.1997 2.56585 12.3169 2.68306C12.4342 2.80027 12.5 2.95924 12.5 3.125V3.75Z"
-                fill="#FF3333"
-              />
-            </svg>
+            <button onClick={onRemove} className="px-2">
+<svg
+                className="w-6 h-6"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.875 3.75H13.75V3.125C13.75 2.62772 13.5525 2.15081 13.2008 1.79917C12.8492 1.44754 12.3723 1.25 11.875 1.25H8.125C7.62772 1.25 7.15081 1.44754 6.79917 1.79917C6.44754 2.15081 6.25 2.62772 6.25 3.125V3.75H3.125C2.95924 3.75 2.80027 3.81585 2.68306 3.93306C2.56585 4.05027 2.5 4.20924 2.5 4.375C2.5 4.54076 2.56585 4.69973 2.68306 4.81694C2.80027 4.93415 2.95924 5 3.125 5H3.75V16.25C3.75 16.5815 3.8817 16.8995 4.11612 17.1339C4.35054 17.3683 4.66848 17.5 5 17.5H15C15.3315 17.5 15.6495 17.3683 15.8839 17.1339C16.1183 16.8995 16.25 16.5815 16.25 16.25V5H16.875C17.0408 5 17.1997 4.93415 17.3169 4.81694C17.4342 4.69973 17.5 4.54076 17.5 4.375C17.5 4.20924 17.4342 4.05027 17.3169 3.93306C17.1997 3.81585 17.0408 3.75 16.875 3.75ZM8.75 13.125C8.75 13.2908 8.68415 13.4497 8.56694 13.5669C8.44973 13.6842 8.29076 13.75 8.125 13.75C7.95924 13.75 7.80027 13.6842 7.68306 13.5669C7.56585 13.4497 7.5 13.2908 7.5 13.125V8.125C7.5 7.95924 7.56585 7.80027 7.68306 7.68306C7.80027 7.56585 7.95924 7.5 8.125 7.5C8.29076 7.5 8.44973 7.56585 8.56694 7.68306C8.68415 7.80027 8.75 7.95924 8.75 8.125V13.125ZM12.5 13.125C12.5 13.2908 12.4342 13.4497 12.3169 13.5669C12.1997 13.6842 12.0408 13.75 11.875 13.75C11.7092 13.75 11.5503 13.6842 11.4331 13.5669C11.3158 13.4497 11.25 13.2908 11.25 13.125V8.125C11.25 7.95924 11.3158 7.80027 11.4331 7.68306C11.5503 7.56585 11.7092 7.5 11.875 7.5C12.0408 7.5 12.1997 7.56585 12.3169 7.68306C12.4342 7.80027 12.5 7.95924 12.5 8.125V13.125ZM12.5 3.75H7.5V3.125C7.5 2.95924 7.56585 2.80027 7.68306 2.68306C7.80027 2.56585 7.95924 2.5 8.125 2.5H11.875C12.0408 2.5 12.1997 2.56585 12.3169 2.68306C12.4342 2.80027 12.5 2.95924 12.5 3.125V3.75Z"
+                  fill="#FF3333"
+                />
+              </svg>
+            </button>
           </div>
           <span className="text-[12px] xl:text-[14px] font-normal">
             Size: {size}
@@ -51,9 +117,11 @@ export default function Page() {
             Color: {color}
           </span>
           <div className="flex flex-row items-center justify-between">
-            <span className="text-xl xl:text-2xl font-bold">${price}</span>
+            <span className="text-xl xl:text-2xl font-bold">
+              ${price * quantity}
+            </span>
             <div className="flex flex-row items-center justify-around bg-[#F0F0F0] w-fit min-w-[100px] rounded-full">
-              <button onClick={substractQuantity}>
+              <button onClick={onDecrement}>
                 <svg
                   className="w-4 h-4 m-3"
                   viewBox="0 0 17 17"
@@ -67,9 +135,9 @@ export default function Page() {
                 </svg>
               </button>
               <span className="text-[16px] font-medium w-6 text-center">
-                {itemQuantity}
+                {quantity}
               </span>
-              <button onClick={incrimentQuantity}>
+              <button onClick={onIncrement}>
                 <svg
                   className="w-4 h-4 m-3"
                   viewBox="0 0 17 17"
@@ -89,80 +157,73 @@ export default function Page() {
     );
   }
 
-  const cartItemData = [
-    {
-      imgSrc: "4a66d9ca1401101dee4cc689f8bb5ad2.png",
-      title: "Gradient Graphic T-shirt",
-      price: 145,
-      quantity: 5,
-      size: "Large",
-      color: "White",
-    },
-    {
-      imgSrc: "5fc84f87eeac1062fbe47f49c192d4f2.png",
-      title: "Checkered Shirt",
-      price: 180,
-      quantity: 5,
-      size: "Medium",
-      color: "Red",
-    },
-    {
-      imgSrc: "ff941dde9bc0e54431b8d8fe3182f5e9.png",
-      title: "Skinny Fit Jeans",
-      price: 240,
-      quantity: 50,
-      size: "Large",
-      color: "Blue",
-    },
-  ];
-  const totalPriceSum = cartItemData.reduce(
+  const subtotal = cartItemData.reduce(
     (sum, item) => sum + item.quantity * item.price,
     0
   );
+  const discount = Math.round(subtotal * 0.2); 
+  const deliveryFee = 50;
+  const total = subtotal - discount + deliveryFee;
 
   return (
-    <main className="max-w-[1102px] mx-auto w-full px-4 xl:px-0">
+    <main className="max-w-[1102px] mx-auto w-full px-4 xl:px-0 2xl:w-full 2xl:max-w-full 2xl:px-4">
       <h1 className="font-clash-display font-bold text-[32px] xl:text-[40px] mb-5 xl:mb-6">
         Your cart
       </h1>
-      <section className="max-w-[470px] xl:max-w-none mx-auto flex flex-col xl:flex-row justify-center gap-5">
-        <div className=" border-[1px] border-gray-300 rounded-3xl p-4">
-          {cartItemData.map((item, index) => (
-            <React.Fragment key={index}>
-              <CartItem
-                imgSrc={`/images/${item.imgSrc}`}
-                title={item.title}
-                price={item.price}
-                quantity={item.quantity}
-                size={item.size}
-                color={item.color}
-              />
-
-              {index < cartItemData.length - 1 && (
-                <div className="bg-gray-300 h-[1px] my-3 mx-4" />
-              )}
-            </React.Fragment>
-          ))}
+      <section className="max-w-[470px] xl:max-w-none mx-auto flex flex-col xl:flex-row 2xl:flex-row justify-center gap-5">
+        <div className="border-[1px] border-gray-300 rounded-3xl p-4 transition-all min-h-[300px] flex flex-col justify-center">
+          <div
+            className={
+              cartItemData.length > 3
+                ? "overflow-y-auto h-[360px] custom-thin-scrollbar"
+                : ""
+            }
+          >
+            {cartItemData.length === 0 ? (
+              <div className="text-center text-gray-500 font-semibold">
+                No items exist
+              </div>
+            ) : (
+              cartItemData.map((item, index) => (
+                <React.Fragment key={index}>
+                  <CartItem
+                    imgSrc={`/images/${item.imgSrc}`}
+                    title={item.title}
+                    price={item.price}
+                    quantity={item.quantity}
+                    size={item.size}
+                    color={item.color}
+                    onRemove={() => handleRemove(index)}
+                    onIncrement={() => incrementQuantity(index)}
+                    onDecrement={() => decrementQuantity(index)}
+                  />
+                  {index < cartItemData.length - 1 && (
+                    <div className="bg-gray-300 h-[1px] my-3 mx-4" />
+                  )}
+                </React.Fragment>
+              ))
+            )}
+          </div>
         </div>
         <div className="flex flex-col w-full h-fit gap-3 font-satoshi text-[16px] xl:text-xl border-[1px] border-gray-300 rounded-3xl p-4">
           <span className="text-xl xl:text-2xl font-bold">Order Summary</span>
           <div className="flex flex-col gap-3">
             <div className="flex flex-row justify-between">
               <span className="text-black/60">Subtotal</span>
-              <span className="font-bold">${totalPriceSum}</span>
+              <span className="font-bold">${subtotal}</span>
             </div>
             <div className="flex flex-row justify-between">
               <span className="text-black/60">Discount (20%)</span>
-              <span className="font-bold text-red-600">-$565</span>
+              <span className="font-bold text-red-600">-${discount}</span>
             </div>
             <div className="flex flex-row justify-between">
               <span className="text-black/60">Delivery Fee</span>
-              <span className="font-bold">$565</span>
+              <span className="font-bold">${deliveryFee}</span>
             </div>
             <div className="bg-gray-300 h-[1px] my-3 mx-4" />
             <div className="flex justify-between">
               <span className="">Total</span>
-              <span className="text-xl font-bold">${totalPriceSum}</span>
+              <span className="text-xl font-bold">${total}</span>
             </div>
             <div className="flex flex-row gap-3 items-center justify-between">
               <div className="w-full h-[48px] xl:h-[52px] bg-[#F0F0F0] rounded-full">
@@ -184,7 +245,7 @@ export default function Page() {
                       <path
                         d="M23.0766 12.4857L13.7653 3.17444C13.5917 2.9997 13.3851 2.86115 13.1576 2.76685C12.93 2.67254 12.686 2.62435 12.4397 2.62507H3.75001C3.45164 2.62507 3.16549 2.7436 2.95451 2.95457C2.74353 3.16555 2.62501 3.4517 2.62501 3.75007V12.4398C2.62429 12.6861 2.67248 12.9301 2.76679 13.1576C2.86109 13.3852 2.99963 13.5918 3.17438 13.7654L12.4856 23.0766C12.8372 23.4281 13.3141 23.6256 13.8113 23.6256C14.3084 23.6256 14.7853 23.4281 15.1369 23.0766L23.0766 15.1369C23.4281 14.7853 23.6255 14.3085 23.6255 13.8113C23.6255 13.3141 23.4281 12.8373 23.0766 12.4857ZM13.8113 21.2204L4.87501 12.2813V4.87507H12.2813L21.2175 13.8113L13.8113 21.2204ZM9.37501 7.87507C9.37501 8.17174 9.28703 8.46175 9.12221 8.70842C8.95739 8.9551 8.72312 9.14736 8.44903 9.26089C8.17494 9.37442 7.87334 9.40412 7.58237 9.34625C7.2914 9.28837 7.02413 9.14551 6.81435 8.93573C6.60457 8.72595 6.46171 8.45868 6.40383 8.1677C6.34595 7.87673 6.37566 7.57513 6.48919 7.30104C6.60272 7.02695 6.79498 6.79269 7.04165 6.62786C7.28833 6.46304 7.57834 6.37507 7.87501 6.37507C8.27283 6.37507 8.65436 6.5331 8.93567 6.81441C9.21697 7.09571 9.37501 7.47724 9.37501 7.87507Z"
                         fill="black"
-                        fill-opacity="0.4"
+                        fillOpacity="0.4"
                       />
                     </svg>
                   </div>

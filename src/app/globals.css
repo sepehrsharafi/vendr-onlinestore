@@ -7,3 +7,14 @@
 .font-clash-display {
   font-family: var(--font-clash-display);
 }
+
+.custom-thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* Tailwind gray-300 */
+  border-radius: 9999px;
+}
+.custom-thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}

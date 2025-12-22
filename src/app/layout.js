@@ -1,4 +1,4 @@
-import { satoshi, clashDisplay } from "./font"; // Import satoshi and clashDisplay fonts
+import { satoshi, clashDisplay } from "./font"; 
 import "./globals.css";
 import Footer from "./ui/root-layout/footer";
 import Header from "./ui/root-layout/header";

@@ -34,7 +34,7 @@ export default function ProductHero({ review }) {
           <p>{review.review}</p>
         </div>
         <span className="text-black/60 font-medium">
-          Posted on{" "}
+          Posted on
           {new Date(review.publishedDate).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",

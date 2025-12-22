@@ -1,4 +1,4 @@
-import ProductHero from "../ui/product/product-hero";
+import ProductHero from "@/app/ui/product/product-hero";
 
 export default function Product() {
   function calculateDiscountedPrice(price, salePercentage) {
@@ -91,7 +91,7 @@ export default function Product() {
     : productItem;
 
   return (
-    <main className="font-satoshi max-w-[1103px] mx-auto p-5">
+    <main className="font-satoshi max-w-[1103px] mx-auto p-5 2xl:w-full 2xl:max-w-full">
       <ProductHero product={processedProductItem} products={products} />
     </main>
   );

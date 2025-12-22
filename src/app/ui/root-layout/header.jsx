@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex row justify-center items-center bg-black text-white py-1">
+      <div className="flex row justify-center items-center bg-black text-white py-1 2xl:w-full 2xl:max-w-full">
         <span>Sign up and get 20% off to your first order.</span>
         <span className="font-medium underline ">Sign Up Now</span>
       </div>
@@ -116,7 +116,7 @@ export default function Header() {
         </div>
       </header>
       <header className="font-satoshi hidden xl:block w-full mb-4">
-        <div className="border-b-[1px] border-gray-300 max-w-[1102px] mx-auto w-full flex flex-row justify-between items-center py-[22px] text-base font-normal">
+        <div className="border-b-[1px] border-gray-300 max-w-[1102px] mx-auto w-full flex flex-row justify-between items-center py-[22px] text-base font-normal 2xl:w-full 2xl:max-w-full 2xl:px-8">
           <Link href={`/`}>
             <svg
               width="159"

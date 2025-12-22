@@ -62,10 +62,10 @@ export default function Home() {
   ];
 
   return (
-    <main className="font-satoshi max-w-[1102px] mx-auto">
+    <main className="font-satoshi xl:max-w-[1102px] mx-auto 2xl:w-full 2xl:max-w-full  overflow-x-hidden">
       <HeroSection />
       <ProductSection title={"NEW ARRIVALS"} products={products} />
-      <div className="bg-gray-200 h-0.5 text-center mx-16 xl:mx-40 py-[1px] gap-2" />
+      <div className="bg-gray-200 h-0.5 text-center mx-16 xl:mx-40 py-[1px] gap-2 2xl:flex 2xl:w-full" />
       <ProductSection title={"TOP SELLING"} products={topSelling} />
       <Browse />
     </main>

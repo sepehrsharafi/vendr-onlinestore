@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Filter } from "../ui/filter-box";
-import FilterMobile from "../ui/filter-mobile";
+import { Filter } from "@/app/ui/filter-box";
+import FilterMobile from "@/app/ui/filter-mobile";
 
 export default function Page() {
   function Product({ imgSrc, title, rate, price, discountedPrice }) {
     return (
-      <article className="flex flex-col gap-1 xl:gap-2 w-[47%] sm:w-40 xl:w-64">
+      <article className="flex flex-col gap-1 xl:gap-2 w-[47%] sm:w-40 xl:w-64 ">
         <Image
           src={imgSrc}
           width={500}
